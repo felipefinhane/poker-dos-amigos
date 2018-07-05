@@ -13,10 +13,28 @@ class CreateCampeonatoUsuariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('campeonato_usuarios', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-        });
+        Schema::create(
+            'campeonato_usuarios',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('user_id');
+                $table->unsignedInteger('campeonato_id');
+                $table->smallInteger('administrator');
+                $table->smallInteger('stat');
+                $table->timestamps();
+                $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users');
+                $table->foreign('campeonato_id')
+                    ->references('id')
+                    ->on('campeonatos');
+                $table->index(
+                    [
+                        'stat'
+                    ]
+                );
+            }
+        );
     }
 
     /**

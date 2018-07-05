@@ -13,10 +13,18 @@ class CreatePartidasTable extends Migration
      */
     public function up()
     {
-        Schema::create('partidas', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-        });
+        Schema::create(
+            'partidas',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('campeonato_id');
+                $table->date('game_date');
+                $table->timestamps();
+                $table->foreign('campeonato_id')
+                    ->references('id')
+                    ->on('campeonatos');
+            }
+        );
     }
 
     /**

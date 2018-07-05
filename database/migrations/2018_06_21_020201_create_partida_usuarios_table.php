@@ -13,10 +13,27 @@ class CreatePartidaUsuariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('partida_usuarios', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-        });
+        Schema::create(
+            'partida_usuarios',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('partida_id');
+                $table->unsignedInteger('campeonato_usuario_id');
+                $table->smallInteger('paid');
+                $table->smallInteger('position');
+                $table->unsignedInteger('carrasco_id');
+                $table->timestamps();
+                $table->foreign('partida_id')
+                    ->references('id')
+                    ->on('partidas');
+                $table->foreign('campeonato_usuario_id')
+                    ->references('id')
+                    ->on('campeonato_usuarios');
+                $table->foreign('carrasco_id')
+                    ->references('id')
+                    ->on('campeonato_usuarios');
+            }
+        );
     }
 
     /**

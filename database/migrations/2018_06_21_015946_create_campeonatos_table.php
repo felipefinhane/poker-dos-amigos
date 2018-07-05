@@ -13,10 +13,18 @@ class CreateCampeonatosTable extends Migration
      */
     public function up()
     {
-        Schema::create('campeonatos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-        });
+        Schema::create(
+            'campeonatos',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('title', 60);
+                $table->text('description')->nullable();
+                $table->date('start_date');
+                $table->date('end_date')->nullable();
+                $table->decimal('price', 10, 2);
+                $table->timestamps();
+            }
+        );
     }
 
     /**

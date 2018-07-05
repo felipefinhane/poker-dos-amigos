@@ -13,10 +13,19 @@ class CreateCampeonatoPontuacaosTable extends Migration
      */
     public function up()
     {
-        Schema::create('campeonato_pontuacaos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-        });
+        Schema::create(
+            'campeonato_pontuacoes',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('campeonato_id');
+                $table->integer('position');
+                $table->decimal('value', 10, 2);
+                $table->timestamps();
+                $table->foreign('campeonato_id')
+                    ->references('id')
+                    ->on('campeonatos');
+            }
+        );
     }
 
     /**
@@ -26,6 +35,6 @@ class CreateCampeonatoPontuacaosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('campeonato_pontuacaos');
+        Schema::dropIfExists('campeonato_pontuacoes');
     }
 }

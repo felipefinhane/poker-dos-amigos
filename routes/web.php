@@ -19,3 +19,15 @@ Route::get(
 );
 
 route::resource('employees', 'EmployeeController');
+
+route::resource('series', 'SerieController');
+
+route::resource(
+    'series/{serieId}/games',
+    'GameController'
+);
+
+route::get(
+    'series/{id}/ranking',
+    'RankingController@index'
+);

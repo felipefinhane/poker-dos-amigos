@@ -15,7 +15,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        return view('index',compact('employees'));
+        return view('index', compact('employees'));
     }
 
     /**
@@ -39,7 +39,7 @@ class EmployeeController extends Controller
         $employee = new Employee();
         $employee->name = $request->get('name');
         $employee->save();
-        return redirect('employees')->with('success','Employee has been added');
+        return redirect('employees')->with('success', 'Employee has been added');
     }
 
     /**
@@ -62,7 +62,7 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = Employee::find($id);
-        return view('edit',compact('employee','id'));
+        return view('edit', compact('employee', 'id'));
     }
 
     /**
@@ -90,6 +90,6 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
         $employee->delete();
-        return redirect('employees')->with('success','Employee Has Been Deleted');
+        return redirect('employees')->with('success', 'Employee Has Been Deleted');
     }
 }
